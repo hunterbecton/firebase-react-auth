@@ -2,11 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import H1 from '../Typography/H1';
-import { useAuth } from '../../hooks/useAuth';
 
 const NotFound = () => {
-  const auth = useAuth();
-
   return (
     <NotFoundContainer>
       <H1>404</H1>

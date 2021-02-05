@@ -1,4 +1,4 @@
-export default {
+const theme = {
   fonts: {
     main: 'Poppins, sans-serif',
   },
@@ -27,3 +27,5 @@ export default {
     glowHoverGreenEnd: '0px 4px 30px rgba(80, 209, 141, 0.6);',
   },
 };
+
+export default theme;

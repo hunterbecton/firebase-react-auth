@@ -81,13 +81,6 @@ const ResetPasswordForm = () => {
     passwordRef.current.focus();
   }, []);
 
-  // Redirect if no params are present
-  useEffect(() => {
-    if (!location.search) {
-      history.push('/forgot-password');
-    }
-  }, []);
-
   // Watch for changes to captcha
   const watchCaptcha = watch('captchaToken');
 
