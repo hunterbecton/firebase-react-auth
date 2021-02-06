@@ -11,7 +11,9 @@ const Signup = () => {
       <H1 textAlign='center' margin='0 0 2rem 0'>
         Sign Up
       </H1>
-      <Text margin='0 0 1rem 0'>Enter an email and password.</Text>
+      <Text margin='0 0 1rem 0' textAlign='center'>
+        Enter an email and password.
+      </Text>
       <SignupForm />
     </FormContainer>
   );

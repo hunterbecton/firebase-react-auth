@@ -27,22 +27,4 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  @media ${(props) => props.theme.breakpoints.s} {
-    :root {
-      font-size: 12px;
-    }
-  }
-
-  @media ${(props) => props.theme.breakpoints.xs} {
-    :root {
-      font-size: 11px;
-    }
-  }
-
-  @media ${(props) => props.theme.breakpoints.xxs} {
-    :root {
-      font-size: 10px;
-    }
-  }
-
 `;

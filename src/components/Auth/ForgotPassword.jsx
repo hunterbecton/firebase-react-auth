@@ -11,7 +11,9 @@ const ForgotPassword = () => {
       <H1 textAlign='center' margin='0 0 2rem 0'>
         Forgot Password
       </H1>
-      <Text margin='0 0 1rem 0'>Enter your email.</Text>
+      <Text margin='0 0 1rem 0' textAlign='center'>
+        Enter your email.
+      </Text>
       <ForgotPasswordForm />
     </FormContainer>
   );

@@ -12,7 +12,9 @@ const Login = () => {
       <H1 textAlign='center' margin='0 0 2rem 0'>
         Login
       </H1>
-      <Text margin='0 0 1rem 0'>Enter your email and password.</Text>
+      <Text margin='0 0 1rem 0' textAlign='center'>
+        Enter your email and password.
+      </Text>
       <LoginForm />
       <Link to='/forgot-password'>Forgot password?</Link>
     </FormContainer>

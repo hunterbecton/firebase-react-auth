@@ -6,6 +6,7 @@ const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 
   a {
     font-size: 1rem;
@@ -20,6 +21,10 @@ const FormContainer = styled.div`
   }
 
   @media ${(props) => props.theme.breakpoints.m} {
+    grid-column: 3 / span 4;
+  }
+
+  @media ${(props) => props.theme.breakpoints.xxs} {
     grid-column: 2 / span 6;
   }
 `;

@@ -50,10 +50,10 @@ const Form = styled.form`
     box-shadow: ${(props) => props.theme.shadows.glowHoverGreenEnd};
   }
 
-  @media ${(props) => props.theme.breakpoints.xxs} {
+  @media ${(props) => props.theme.breakpoints.s} {
     input[type='email'],
     input[type='password'] {
-      width: 90%;
+      width: 80%;
     }
   }
 `;
