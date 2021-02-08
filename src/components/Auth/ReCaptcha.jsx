@@ -14,6 +14,7 @@ const CaptchaButton = ({
   ...rest
 }) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
+
   const clickHandler = async () => {
     if (!executeRecaptcha) {
       return;
