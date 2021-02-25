@@ -43,15 +43,27 @@ const ForgotPassword = () => {
 
   const emailRef = useRef(null);
 
+  // Manually register captchaToken
+  useEffect(() => {
+    register({ name: 'captchaToken' });
+  }, []);
+
+  // Watch for changes to captcha
+  const watchCaptcha = watch('captchaToken');
+
+  // Set focus on email
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
   const onSubmit = async (data) => {
     try {
       await auth.sendPasswordResetEmail(data.email);
       toast('Check email to complete.');
+      reset();
     } catch {
       toast.error('Error resetting password.');
     }
-
-    reset();
   };
 
   const onVerifyCaptcha = (token) => {
@@ -59,19 +71,6 @@ const ForgotPassword = () => {
     clearErrors(['captchaToken']);
     submitRef.current.focus();
   };
-
-  // Manually register captchaToken
-  useEffect(() => {
-    register({ name: 'captchaToken' });
-  });
-
-  // Set focus on email
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
-
-  // Watch for changes to captcha
-  const watchCaptcha = watch('captchaToken');
 
   return (
     <FormContainer>

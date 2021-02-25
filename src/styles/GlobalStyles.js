@@ -13,7 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     
     body {
       background-color: ${(props) => props.theme.colors.black1};
-      font-family: 'Poppins', sans-serif;
+      font-family: ${(props) => props.theme.fonts.main};
       font-weight: 400;
     }
 

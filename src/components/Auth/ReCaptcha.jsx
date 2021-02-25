@@ -22,6 +22,8 @@ const CaptchaButton = ({
 
     const token = await executeRecaptcha('contact');
 
+    console.log(`token: ${token}`);
+
     onVerifyCaptcha(token);
   };
 
@@ -47,9 +49,7 @@ export const ReCaptcha = ({
   verified,
   ...rest
 }) => (
-  <GoogleReCaptchaProvider
-    reCaptchaKey={`${process.env.REACT_APP_CAPTCHA_SITE}`}
-  >
+  <GoogleReCaptchaProvider reCaptchaKey={process.env.REACT_APP_CAPTCHA_SITE}>
     <CaptchaButton
       onVerifyCaptcha={onVerifyCaptcha}
       backgroundColor={backgroundColor}

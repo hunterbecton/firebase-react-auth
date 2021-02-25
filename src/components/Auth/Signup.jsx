@@ -50,6 +50,8 @@ const Signup = () => {
 
   const theme = useTheme();
 
+  const history = useHistory();
+
   const submitRef = useRef(null);
 
   const emailRef = useRef(null);
@@ -58,17 +60,28 @@ const Signup = () => {
 
   const passwordConfirmRef = useRef(null);
 
-  const history = useHistory();
+  // Manually register captchaToken
+  useEffect(() => {
+    register({ name: 'captchaToken' });
+  }, []);
+
+  // Watch for changes to captcha
+  const watchCaptcha = watch('captchaToken');
+
+  // Set focus on email
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
 
   const onSubmit = async (data) => {
     try {
       await auth.signup(data.email, data.password);
       toast('Welcome! 👋');
+      reset();
       history.push('/');
     } catch {
       toast.error('Error signing up.');
     }
-    reset();
   };
 
   const onVerifyCaptcha = (token) => {
@@ -76,19 +89,6 @@ const Signup = () => {
     clearErrors(['captchaToken']);
     submitRef.current.focus();
   };
-
-  // Manually register captchaToken
-  useEffect(() => {
-    register({ name: 'captchaToken' });
-  });
-
-  // Set focus on email
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
-
-  // Watch for changes to captcha
-  const watchCaptcha = watch('captchaToken');
 
   return (
     <FormContainer>

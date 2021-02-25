@@ -41,24 +41,36 @@ const Login = () => {
 
   const theme = useTheme();
 
+  const history = useHistory();
+
   const submitRef = useRef(null);
 
   const emailRef = useRef(null);
 
   const passwordRef = useRef(null);
 
-  const history = useHistory();
+  // Manually register captchaToken
+  useEffect(() => {
+    register({ name: 'captchaToken' });
+  }, []);
+
+  // Watch for changes to captcha
+  const watchCaptcha = watch('captchaToken');
+
+  // Set focus on email
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
 
   const onSubmit = async (data) => {
     try {
       await auth.login(data.email, data.password);
       toast('Welcome! 👋');
+      reset();
       history.push('/');
     } catch {
       toast.error('Error logging in.');
     }
-
-    reset();
   };
 
   const onVerifyCaptcha = (token) => {
@@ -66,19 +78,6 @@ const Login = () => {
     clearErrors(['captchaToken']);
     submitRef.current.focus();
   };
-
-  // Manually register captchaToken
-  useEffect(() => {
-    register({ name: 'captchaToken' });
-  });
-
-  // Set focus on email
-  useEffect(() => {
-    emailRef.current.focus();
-  }, []);
-
-  // Watch for changes to captcha
-  const watchCaptcha = watch('captchaToken');
 
   return (
     <FormContainer>

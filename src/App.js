@@ -18,16 +18,16 @@ const App = () => {
           <PrivateRoute exact path='/'>
             <Dashboard />
           </PrivateRoute>
-          <Route exact path='/signup'>
+          <Route path='/signup'>
             <Signup />
           </Route>
-          <Route exact path='/login'>
+          <Route path='/login'>
             <Login />
           </Route>
-          <Route exact path='/forgot-password'>
+          <Route path='/forgot-password'>
             <ForgotPassword />
           </Route>
-          <Route exact path='/reset-password'>
+          <Route path='/reset-password'>
             <ResetPassword />
           </Route>
           <Route>

@@ -45,26 +45,39 @@ const ResetPassword = () => {
 
   const theme = useTheme();
 
+  const history = useHistory();
+
+  const location = useLocation();
+
   const submitRef = useRef(null);
 
   const passwordRef = useRef(null);
 
   const passwordConfirmRef = useRef(null);
 
-  const history = useHistory();
+  // Manually register captchaToken
+  useEffect(() => {
+    register({ name: 'captchaToken' });
+  }, []);
 
-  const location = useLocation();
+  // Watch for changes to captcha
+  const watchCaptcha = watch('captchaToken');
+
+  // Set focus on password
+  useEffect(() => {
+    passwordRef.current.focus();
+  }, []);
 
   const onSubmit = async (data) => {
     try {
       const parsed = queryString.parse(location.search);
       await auth.confirmPasswordReset(parsed.oobCode, data.password);
       toast('Password reset.');
-      history.push('/');
+      reset();
+      history.push('/login');
     } catch {
       toast.error('Error resetting password.');
     }
-    reset();
   };
 
   const onVerifyCaptcha = (token) => {
@@ -72,19 +85,6 @@ const ResetPassword = () => {
     clearErrors(['captchaToken']);
     submitRef.current.focus();
   };
-
-  // Manually register captchaToken
-  useEffect(() => {
-    register({ name: 'captchaToken' });
-  });
-
-  // Set focus on password
-  useEffect(() => {
-    passwordRef.current.focus();
-  }, []);
-
-  // Watch for changes to captcha
-  const watchCaptcha = watch('captchaToken');
 
   return (
     <FormContainer>

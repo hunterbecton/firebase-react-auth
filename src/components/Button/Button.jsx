@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   padding: 0.5rem 1.5rem;
-  margin: ${(props) => (props.margin ? props.margin : 0)};
+  margin: ${(props) => (props.margin ? props.margin : '0')};
   color: ${(props) => props.theme.colors.white3};
   font-size: 1rem;
   line-height: 1.25rem;
