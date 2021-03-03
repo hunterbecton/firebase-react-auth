@@ -12,24 +12,18 @@ firebase.initializeApp({
   appID: process.env.REACT_APP_FB_APP,
 });
 
-const authContext = createContext();
-
-// Provider component that wraps your app and makes auth object
-// ... available to any child component that calls useAuth().
-export function ProvideAuth({ children }) {
-  const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
+const AuthContext = createContext();
 
 // Hook for child components to get the auth object ...
 // ... and re-render when it changes.
 export const useAuth = () => {
-  return useContext(authContext);
+  return useContext(AuthContext);
 };
 
 // Provider hook that creates auth object and handles state
-function useProvideAuth() {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
 
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
@@ -86,24 +80,30 @@ function useProvideAuth() {
   // ... latest auth object.
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(false);
-      }
+      setUser(user);
+      setIsAuthenticating(false);
     });
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
-  // Return the user object and auth methods
-  return {
+  // The user object and auth methods
+  const values = {
     user,
+    isAuthenticating,
     login,
     signup,
     logout,
     sendPasswordResetEmail,
     confirmPasswordReset,
   };
-}
+
+  // Provider component that wraps your app and makes auth object
+  // ... available to any child component that calls useAuth().
+  return (
+    <AuthContext.Provider value={values}>
+      {!isAuthenticating && children}
+    </AuthContext.Provider>
+  );
+};
